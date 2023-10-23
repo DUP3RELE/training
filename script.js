@@ -1,5 +1,23 @@
-var addTwoPromises = async function(promise1, promise2) {
-    const [value1, value2] = await Promise.all([promise1, promise2]);
-    
-    return value1 + value2
-};
+function once(fn) {
+    let hasBeenCalled = false;
+    let result;
+
+    return function (...args) {
+        if (!hasBeenCalled) {
+            result = fn(...args);
+            hasBeenCalled = true;
+            return result;
+        } else {
+            return undefined;
+        }
+    };
+}
+
+function originalFunction(x, y) {
+    return x + y;
+}
+
+const callOnce = once(originalFunction);
+
+console.log(callOnce(2, 3)); 
+console.log(callOnce(4, 5));
