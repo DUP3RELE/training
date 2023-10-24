@@ -1,23 +1,20 @@
-function once(fn) {
-    let hasBeenCalled = false;
-    let result;
+var mergeAlternately = function (word1, word2) {
+	var merged = [];
+	var i = 0;
+	var j = 0;
 
-    return function (...args) {
-        if (!hasBeenCalled) {
-            result = fn(...args);
-            hasBeenCalled = true;
-            return result;
-        } else {
-            return undefined;
-        }
-    };
-}
+	while (i < word1.length || j < word2.length) {
+		if (i < word1.length) {
+			merged.push(word1[i]);
+			i++;
+		}
 
-function originalFunction(x, y) {
-    return x + y;
-}
+		if (j < word2.length) {
+			merged.push(word2[j]);
+			j++;
+		}
+	}
 
-const callOnce = once(originalFunction);
-
-console.log(callOnce(2, 3)); 
-console.log(callOnce(4, 5));
+	return merged.join("");
+};
+console.log(merged);
