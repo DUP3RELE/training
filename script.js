@@ -1,20 +1,8 @@
-var mergeAlternately = function (word1, word2) {
-	var merged = [];
-	var i = 0;
-	var j = 0;
-
-	while (i < word1.length || j < word2.length) {
-		if (i < word1.length) {
-			merged.push(word1[i]);
-			i++;
-		}
-
-		if (j < word2.length) {
-			merged.push(word2[j]);
-			j++;
-		}
-	}
-
-	return merged.join("");
+const expect = (val) => {
+    const throwError = (errorStr) => {throw new Error(errorStr)};
+    
+    return {
+        toBe:    (val2) => val2 === val || throwError('Not Equal'),
+        notToBe: (val2) => val2 !== val || throwError('Equal'),
+    };
 };
-console.log(merged);
