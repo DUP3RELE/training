@@ -1,42 +1,18 @@
-function gcdOfStrings(str1, str2) {
-    if (str1 + str2 !== str2 + str1) {
-        return '';
-    }
-
-    const gcd = (a, b) => (b === 0 ? a : gcd(b, a % b));
-    const commonLength = gcd(str1.length, str2.length);
+var createCounter = function(init) {
     
-    return str1.slice(0, commonLength);
-}
-function gcdOfStrings(str1, str2) {
-    if (str1 + str2 !== str2 + str1) {
-        return '';
-    }
-
-    const gcd = (a, b) => (b === 0 ? a : gcd(b, a % b));
-    const commonLength = gcd(str1.length, str2.length);
+    let current = init;
     
-    return str1.slice(0, commonLength);
-}
-
-
-const str1 = "ABCABC";
-const str2 = "ABC";
-const result = gcdOfStrings(str1, str2);
-console.log(result);
-function gcdOfStrings(str1, str2) {
-    if (str1 + str2 !== str2 + str1) {
-        return '';
+    const increment = () => {
+        current += 1
+        return current;
     }
-
-    const gcd = (a, b) => (b === 0 ? a : gcd(b, a % b));
-    const commonLength = gcd(str1.length, str2.length);
-    
-    return str1.slice(0, commonLength);
-}
-
-
-const str1 = "ABCABC";
-const str2 = "ABC";
-const result = gcdOfStrings(str1, str2);
-console.log(result);
+    const decrement = () => {
+        current -= 1
+        return current;
+    }
+    const reset = () => {
+        current = init;
+        return init
+    }
+    return {increment, decrement, reset};
+};
