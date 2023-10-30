@@ -1,18 +1,8 @@
-var createCounter = function(init) {
+var map = function(arr, fn) {
+    const result = [];
+    for (let i = 0; i < arr.length; i++) {
+        result[i] = fn(arr[i], i);
+    }
+    return result;
     
-    let current = init;
-    
-    const increment = () => {
-        current += 1
-        return current;
-    }
-    const decrement = () => {
-        current -= 1
-        return current;
-    }
-    const reset = () => {
-        current = init;
-        return init
-    }
-    return {increment, decrement, reset};
 };
