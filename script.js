@@ -1,8 +1,9 @@
-var map = function(arr, fn) {
-    const result = [];
+var filter = function(arr, fn) {
+    const filteredArr = [];
     for (let i = 0; i < arr.length; i++) {
-        result[i] = fn(arr[i], i);
+        if (fn(arr[i], i)) {
+            filteredArr.push(arr[i]);
+        }
     }
-    return result;
-    
+    return filteredArr;
 };
