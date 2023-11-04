@@ -1,9 +1,13 @@
-var filter = function(arr, fn) {
-    const filteredArr = [];
-    for (let i = 0; i < arr.length; i++) {
-        if (fn(arr[i], i)) {
-            filteredArr.push(arr[i]);
-        }
+// nums = [1,2,3,4]
+// fn = function sum(accum, curr) { return accum + curr; }
+// init = 0
+
+
+var reduce = function(nums, fn, init) {
+    let result = init;
+    for (let i = 0; i < nums.length; i++ ) {
+        result = fn(result, nums[i])
     }
-    return filteredArr;
+    return result
 };
+
