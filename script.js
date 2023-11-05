@@ -1,13 +1,14 @@
-// nums = [1,2,3,4]
-// fn = function sum(accum, curr) { return accum + curr; }
-// init = 0
-
-
-var reduce = function(nums, fn, init) {
-    let result = init;
-    for (let i = 0; i < nums.length; i++ ) {
-        result = fn(result, nums[i])
-    }
-    return result
-};
-
+function memoize(fn) {
+    const cache = {};
+  
+    return function (...args) {
+      const key = JSON.stringify(args);
+      if (key in cache) {
+        return cache[key];
+      } else {
+        const result = fn(...args);
+        cache[key] = result;
+        return result;
+      }
+    };
+  }
