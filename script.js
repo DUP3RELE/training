@@ -1,38 +1,53 @@
-// functions = [x => x + 1, x => x * x, x => 2 * x], x = 4
+/**
+ * @param {Function} fn
+ * @param {Array} args
+ * @param {number} t
+ * @return {Function}
+ */
+var cancellable = function(fn, args, t) {
+  let timeoutId;
 
-// // var compose = function(functions) {
-// //   function composeHelper(f, g) {
-// //   return (x) => f(g(x));
-// // }
-// //  let composedFunction = functions[functions.length - 1];
-// // for (let i = functions.length - 2; i >= 0; i--) {
-// //   composedFunction = composeHelper(functions[i], composedFunction);
-// // }
+const cancelFn = () => {
+  if (timeoutId) {
+    clearTimeout(timeoutId);
+    timeoutId = null;
+  }
+};
 
-// // return composedFunction;
-// // }
+const executeFn = () => {
+  if (timeoutId) {
+    fn(...args);
+    timeoutId = null;
+  }
+};
 
-// var compose = function(functions) {
-//   return x => functions.reduceRight((acc,f)=>f(acc),x)
-// };
+timeoutId = setTimeout(executeFn, t);
 
-
-
-
-//  console.log(function);
+return cancelFn;
+};
 
 /**
- * @param {number} millis
- * @return {Promise}
- */
-async function sleep(millis) {
-  return new Promise((resolve) => {
-  setTimeout(resolve, millis);
-});
-}
-
-
-/** 
-* let t = Date.now()
-* sleep(100).then(() => console.log(Date.now() - t)) // 100
+*  const result = []
+*
+*  const fn = (x) => x * 5
+*  const args = [2], t = 20, cancelT = 50
+*
+*  const start = performance.now() 
+*
+*  const log = (...argsArr) => {
+*      const diff = Math.floor(performance.now() - start);
+*      result.push({"time": diff, "returned": fn(...argsArr)})
+*  }
+*       
+*  const cancel = cancellable(log, args, t);
+*
+*  const maxT = Math.max(t, cancelT)
+*           
+*  setTimeout(() => {
+*     cancel()
+*  }, cancelT)
+*
+*  setTimeout(() => {
+*     console.log(result) // [{"time":20,"returned":10}]
+*  }, maxT + 15)
 */
