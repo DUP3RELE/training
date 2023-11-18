@@ -1,38 +1,16 @@
 /**
- * @param {string} s
- * @return {string}
+ * @param {Promise} promise1
+ * @param {Promise} promise2
+ * @return {Promise}
  */
-var reverseVowels = function(s) {
-  const chars = s.split('');
-  
-  const vowels = new Set(['a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U']);
-  
-  let left = 0;
-  let right = chars.length - 1;
-  
-  while (left < right) {
-      while (left < right && !vowels.has(chars[left])) {
-          left++;
-      }
-      while (left < right && !vowels.has(chars[right])) {
-          right--;
-      }
-      if (left < right) {
-          const temp = chars[left];
-          chars[left] = chars[right];
-          chars[right] = temp;
-          
-          left++;
-          right--;
-      }
-  }
-  return chars.join('');
-};
-
-/**
- * @param {Object|Array} obj
- * @return {boolean}
- */
-var isEmpty = function(obj) {
-    return Object.keys(obj).length === 0 ? true : false;
-};
+var addTwoPromises = async function(promise1, promise2) {
+    let p1r = await promise1
+    let p2r =  await promise2
+    let promise3 = p1r + p2r
+    return promise3;
+ };
+ 
+ /**
+  * addTwoPromises(Promise.resolve(2), Promise.resolve(2))
+  *   .then(console.log); // 4
+  */
